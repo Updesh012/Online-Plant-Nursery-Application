@@ -1,0 +1,138 @@
+package com.masai.controllers;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.masai.exceptions.PlantNotFoundException;
+import com.masai.models.Plant;
+import com.masai.services.PlantService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+@RestController
+public class PlantController {
+
+	@Autowired
+	private PlantService pService;
+
+//	just checking
+	@GetMapping("/welcome")
+	public String welcome() {
+
+		return "welcome to The Green Country";
+
+	}
+
+//	adding new plant in database
+
+	@PostMapping("/plants")
+	public ResponseEntity<Plant> addPlantHandler(@RequestBody Plant plant) {
+
+		Plant pObj = pService.addPlant(plant);
+
+		return new ResponseEntity<Plant>(pObj, HttpStatus.CREATED);
+
+	}
+
+//	getting all plants details from database
+
+	@GetMapping("/plants")
+	public ResponseEntity<List<Plant>> getAllPlantsHandler() throws PlantNotFoundException {
+
+		List<Plant> plants = pService.getAllPlants();
+
+		return new ResponseEntity<List<Plant>>(plants, HttpStatus.OK);
+	}
+
+	// updating existing plant details
+
+	@PutMapping("/plants/")
+	public ResponseEntity<Plant> updatePlantHandler(@Valid @RequestBody Plant plant)
+			throws PlantNotFoundException {
+
+		Plant pObj = pService.updatePlant(plant);
+
+		return new ResponseEntity<Plant>(pObj, HttpStatus.ACCEPTED);
+
+	}
+
+	// delete existing plant by PlantId
+
+	@DeleteMapping("/plants/{id}")
+	public ResponseEntity<Plant> deletePlantByIdHandler(@PathVariable("id") Integer plantId)
+			throws PlantNotFoundException {
+
+		Plant plant = pService.deletePlantById(plantId);
+
+		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+
+	}
+
+	// view plant by PlantId
+
+	@GetMapping("/plants/{id}")
+	public ResponseEntity<Plant> viewPlantByIdHandler(@PathVariable("id") Integer plantId)
+			throws PlantNotFoundException {
+
+		Plant plant = pService.viewPlantById(plantId);
+
+		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+
+	}
+
+	// view Plant by Plant name
+
+	@GetMapping("/plant/{name}")
+	public ResponseEntity<List<Plant>> viewPlantByPlantNameHandler(@PathVariable("name") String name)
+			throws PlantNotFoundException {
+
+		List<Plant> list = pService.viewPlantByName(name);
+
+		return new ResponseEntity<List<Plant>>(list, HttpStatus.OK);
+
+	}
+
+	// view plants by plantType
+	@GetMapping("/getPlants/{plantType}")
+	public ResponseEntity<List<Plant>> viewPlantsByPlantTypeHandler(@PathVariable("plantType") String type)
+			throws PlantNotFoundException {
+
+		List<Plant> list = pService.viewPlantsByPlantType(type);
+
+		return new ResponseEntity<List<Plant>>(list, HttpStatus.OK);
+	}
+
+	// set new Quantity of plant
+
+	@PutMapping("/setPlantQuantity/{id}/{quantity}")
+	public ResponseEntity<Plant> setPlantQuantityByplantIdHandler(@PathVariable("id") Integer plantid,
+			@PathVariable("quantity") Integer quantity) throws PlantNotFoundException {
+
+		Plant plant = pService.changeQuantityOfPlantByPlantId(plantid, quantity);
+
+		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+	}
+
+	// set new Price of plant
+
+	@PutMapping("/setPlantPrice/{id}/{price}")
+	public ResponseEntity<Plant> setPlantPriceByplantIdHandler(@PathVariable("id") Integer plantid,
+			@PathVariable("price") Double price) throws PlantNotFoundException {
+
+		Plant plant = pService.changePriceOfPlantByPlantId(plantid, price);
+
+		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+	}
+
+}
