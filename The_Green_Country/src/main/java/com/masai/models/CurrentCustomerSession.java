@@ -15,8 +15,10 @@ import lombok.ToString;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class CurrentUserSession {
+public class CurrentCustomerSession {
 	
 
 	@Id
@@ -30,12 +32,6 @@ public class CurrentUserSession {
 
 	
 
-	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDateTime) {
-		super();
-		this.userId = userId;
-		this.uuid = uuid;
-		this.localDateTime = localDateTime;
-	}
 
 	public Integer getUserId() {
 		return userId;
@@ -61,14 +57,7 @@ public class CurrentUserSession {
 		this.localDateTime = localDateTime;
 	}
 
-	@Override
-	public String toString() {
-		return "CurrentUserSession [userId=" + userId + ", uuid=" + uuid + ", localDateTime=" + localDateTime + "]";
-	}
-
-	public CurrentUserSession() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	
 

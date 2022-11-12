@@ -6,11 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exceptions.AdminException;
 import com.masai.exceptions.CustomerException;
-import com.masai.models.CurrentUserSession;
+import com.masai.models.CurrentAdminSession;
+import com.masai.models.CurrentCustomerSession;
 import com.masai.models.Customer;
+import com.masai.repositories.AdminSessionDao;
 import com.masai.repositories.CustomerDao;
 import com.masai.repositories.CustomerSessionDao;
+
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -20,6 +24,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerSessionDao sDao;
+	
+	@Autowired
+	private AdminSessionDao asDao;
 	
 	
 	@Override
@@ -44,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer updateCustomer(Customer customer, String key) throws CustomerException{
 	
-		CurrentUserSession loggedInUser= sDao.findByUuid(key);
+		CurrentCustomerSession loggedInUser= sDao.findByUuid(key);
 	
 		if(loggedInUser == null) {
 			throw new CustomerException("Please provide a valid key to update a customer");
@@ -78,16 +85,22 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getAllCustomersDeatils() throws CustomerException {
-		 List<Customer>list =  cDao.findAll();
-		if(list.size()!=0) {
-			return list;
-		}else {
-			throw new CustomerException("List is empty..!");
-		}
+	public List<Customer> getAllCustomersDeatils(String key) throws CustomerException, AdminException {
+		   CurrentAdminSession casDao =  asDao.findByUuid(key);
+		   
+		   if(casDao!=null) {
+		
+			   List<Customer>list =  cDao.findAll();
+				if(list.size()!=0) {
+					return list;
+				}else {
+					throw new CustomerException("List is empty..!");
+				}
+		   }else {
+			   throw new AdminException("Wrong key..!");
+		   }
+		
 	}
-
-	
 		
 		
 		

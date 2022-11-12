@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.exceptions.LoginException;
-import com.masai.models.CurrentUserSession;
+import com.masai.models.CurrentCustomerSession;
 import com.masai.models.Customer;
-import com.masai.models.Customer;
-import com.masai.models.LoginDTO;
+import com.masai.models.CustomerLoginDTO;
 import com.masai.repositories.CustomerDao;
 import com.masai.repositories.CustomerSessionDao;
 
 import net.bytebuddy.utility.RandomString;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class CustomerLoginServiceImpl implements CustomerLoginService {
 
 	@Autowired
 	private CustomerDao cDao;
@@ -26,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 	private CustomerSessionDao sDao;
 
 	@Override
-	public String logIntoAccount(LoginDTO dto) throws LoginException {
+	public String logIntoAccount(CustomerLoginDTO dto) throws LoginException {
 
 		Customer existingCustomer = cDao.findByEmail(dto.getEmail());
 
@@ -36,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 
 		}
 
-		Optional<CurrentUserSession> validCustomerSessionOpt = sDao.findById(existingCustomer.getCustomerId());
+		Optional<CurrentCustomerSession> validCustomerSessionOpt = sDao.findById(existingCustomer.getCustomerId());
 
 		if (validCustomerSessionOpt.isPresent()) {
 
@@ -48,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
 
 			String key = RandomString.make(6);
 
-			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerId(), key,
+			CurrentCustomerSession currentUserSession = new CurrentCustomerSession(existingCustomer.getCustomerId(), key,
 					LocalDateTime.now());
 
 			sDao.save(currentUserSession);
@@ -62,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String logOutFromAccount(String key) throws LoginException {
 
-		CurrentUserSession validCustomerSession = sDao.findByUuid(key);
+		CurrentCustomerSession validCustomerSession = sDao.findByUuid(key);
 
 		if (validCustomerSession == null) {
 			throw new LoginException("User Not Logged In with this Email");
@@ -74,7 +73,5 @@ public class LoginServiceImpl implements LoginService {
 		return "Logged Out !";
 
 	}
-
-	
 
 }
