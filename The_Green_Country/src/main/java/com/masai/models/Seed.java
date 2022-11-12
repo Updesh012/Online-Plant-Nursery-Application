@@ -57,10 +57,10 @@ public class Seed {
 	private Double cost;
 
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "planterId")
-	@JsonIgnore
-	private Planter planter;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "planterId")
+//	@JsonIgnore
+//	private Planter planter;
 
 
 

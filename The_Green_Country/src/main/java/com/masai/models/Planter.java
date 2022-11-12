@@ -54,7 +54,7 @@ public class Planter {
 	@Min(value = 1, message = "Planter cost is must be greater than equal to 1")
 	private Integer PlanterCost;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "planter")
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Seed> seeds = new ArrayList<>(); 
 	
 	
