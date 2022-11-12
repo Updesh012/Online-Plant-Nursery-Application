@@ -2,11 +2,11 @@ package com.masai.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.masai.models.CurrentUserSession;
+import com.masai.models.CurrentCustomerSession;
 
 
-public interface CustomerSessionDao extends JpaRepository<CurrentUserSession, Integer> {
+public interface CustomerSessionDao extends JpaRepository<CurrentCustomerSession, Integer> {
 
 	
-	public  CurrentUserSession  findByUuid(String uuid);
+	public  CurrentCustomerSession  findByUuid(String uuid);
 }

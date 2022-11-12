@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.exceptions.AdminException;
 import com.masai.exceptions.CustomerException;
+import com.masai.models.Admin;
+import com.masai.models.CurrentAdminSession;
 import com.masai.models.Customer;
+import com.masai.repositories.AdminSessionDao;
+import com.masai.services.AdminService;
 import com.masai.services.CustomerService;
 
 
@@ -28,37 +33,86 @@ public class AdminController {
 	@Autowired
 	private CustomerService cService;
 
-	@PostMapping("/customers")
-	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) throws CustomerException {
+	@Autowired
+	private AdminService aService;
 
-		Customer savedCustomer = cService.createCustomer(customer);
+	@Autowired
+	private AdminSessionDao asDao;
 
-		return new ResponseEntity<Customer>(savedCustomer, HttpStatus.CREATED);
+	@PostMapping("/createadmin")
+	public ResponseEntity<Admin> saveAdmin(@RequestBody Admin admin) throws AdminException {
+
+		Admin savedAdmin = aService.createAdmin(admin);
+
+		return new ResponseEntity<Admin>(savedAdmin, HttpStatus.CREATED);
+	}
+
+	@PostMapping("/customers/{adminkey}")
+	public ResponseEntity<Customer> saveCustomer(@PathVariable("adminkey") String key, @RequestBody Customer customer)
+			throws CustomerException, AdminException {
+
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
+
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+
+			Customer savedCustomer = aService.createCustomer(customer);
+
+			return new ResponseEntity<Customer>(savedCustomer, HttpStatus.CREATED);
+		}
+
 	}
 
 	@PutMapping("/customers")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer,
-			@RequestParam(required = false) String key) throws CustomerException {
+			@RequestParam(required = false) String key) throws CustomerException, AdminException {
 
-		Customer updatedCustomer = cService.updateCustomer(customer, key);
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		return new ResponseEntity<Customer>(updatedCustomer, HttpStatus.OK);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+
+			Customer updatedCustomer = aService.updateCustomer(customer,key);
+
+			return new ResponseEntity<Customer>(updatedCustomer, HttpStatus.OK);
+
+		}
 
 	}
 
 	@DeleteMapping("/customers/{customerId}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") Integer customerId)
-			throws CustomerException {
-		String message = cService.deleteCustomerById(customerId);
+	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") Integer customerId,
+			@RequestParam(required = false) String key) throws CustomerException, AdminException {
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		return new ResponseEntity<String>(message, HttpStatus.OK);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+
+			String message = cService.deleteCustomerById(customerId);
+
+			return new ResponseEntity<String>(message, HttpStatus.OK);
+
+		}
 	}
 
-	@GetMapping("/getcustomers")
-	public ResponseEntity<List<Customer>> getAllCustomers() throws CustomerException {
-		List<Customer> list = cService.getAllCustomersDeatils();
+	@GetMapping("/getcustomers/{adminkey}")
+	public ResponseEntity<List<Customer>> getAllCustomers(@PathVariable("adminkey") String key)
+			throws CustomerException, AdminException {
 
-		return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
+
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+
+			List<Customer> list = cService.getAllCustomersDeatils(key);
+
+			return new ResponseEntity<List<Customer>>(list, HttpStatus.OK);
+
+		}
 
 	}
 

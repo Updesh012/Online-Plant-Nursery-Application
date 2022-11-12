@@ -1,7 +1,5 @@
 package com.masai.controllers;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,34 +11,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exceptions.LoginException;
-import com.masai.models.CustomerLoginDTO;
-import com.masai.services.CustomerLoginService;
+import com.masai.models.AdminLoginDTO;
+import com.masai.services.AdminLoginService;
+
 
 @RestController
-@RequestMapping("/customer")
-public class CustomerLoginController {
+@RequestMapping("/admin")
+public class AdminLoginController {
 
 	@Autowired
-	private CustomerLoginService customerLogin;
-	
-	@PostMapping("/login")
-	public ResponseEntity<String> logInCustomer(@RequestBody CustomerLoginDTO dto) throws LoginException {
-		
-		String result = customerLogin.logIntoAccount(dto);
-		
+	private AdminLoginService adminLogin;
 
-		
-		return new ResponseEntity<String>(result,HttpStatus.OK );
-		
-		
+	@PostMapping("/login")
+	public ResponseEntity<String> logInAdmin(@RequestBody AdminLoginDTO dto) throws LoginException {
+
+		String result = adminLogin.logIntoAccount(dto);
+
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping("/logout")
-	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
-		return customerLogin.logOutFromAccount(key);
-		
+	public String logoutAdmin(@RequestParam(required = false) String key) throws LoginException {
+		return adminLogin.logOutFromAccount(key);
+
 	}
-	
-	
-	
+
 }

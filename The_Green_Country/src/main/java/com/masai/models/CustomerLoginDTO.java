@@ -3,7 +3,7 @@ package com.masai.models;
 import lombok.Data;
 
 @Data
-public class LoginDTO {
+public class CustomerLoginDTO {
 
 	private String mobileNo;
 	private String password;

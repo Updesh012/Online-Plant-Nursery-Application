@@ -1,11 +1,11 @@
 package com.masai.services;
 
 import com.masai.exceptions.LoginException;
-import com.masai.models.LoginDTO;
+import com.masai.models.AdminLoginDTO;
 
-public interface LoginService {
+public interface AdminLoginService {
 	
-	public String logIntoAccount(LoginDTO dto)throws LoginException;
+	public String logIntoAccount(AdminLoginDTO dto)throws LoginException;
 
 	public String logOutFromAccount(String key)throws LoginException;
 
