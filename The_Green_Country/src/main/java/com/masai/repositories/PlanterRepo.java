@@ -15,4 +15,6 @@ public interface PlanterRepo extends JpaRepository<Planter, Integer>{
 	@Query("select p.seeds from Planter p where p.planterId = ?1")
 	public List<Seed> getAllSeedsByPlanterId(Integer id);
 	
+	
+	
 }

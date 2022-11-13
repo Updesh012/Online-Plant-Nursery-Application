@@ -26,12 +26,7 @@ public class PlanterController {
 	@Autowired
 	private PlanterService pService;
 
-	@PostMapping("/planter")
-	public String post(@RequestBody Planter obj) {
 
-		return "done";
-
-	}
 
 	@PostMapping("/planters")
 	public ResponseEntity<Planter> addPlanterOnly(@RequestBody PlanterDto pDto) {

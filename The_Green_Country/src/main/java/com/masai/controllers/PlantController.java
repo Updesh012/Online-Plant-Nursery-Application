@@ -26,13 +26,7 @@ public class PlantController {
 	@Autowired
 	private PlantService pService;
 
-//	just checking
-	@GetMapping("/welcome")
-	public String welcome() {
 
-		return "welcome to The Green Country";
-
-	}
 
 //	adding new plant in database
 
