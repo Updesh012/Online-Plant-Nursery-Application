@@ -37,12 +37,7 @@ public class PlanterController {
 	private AdminSessionDao asDao;
 
 
-	@PostMapping("/planter")
-	public String post(@RequestBody Planter obj) {
 
-		return "done";
-
-	}
 
 	@PostMapping("admin/planters/{adminkey}")
 	public ResponseEntity<Planter> addPlanterOnly(@PathVariable("adminkey") String key,@RequestBody PlanterDto pDto) throws AdminException {

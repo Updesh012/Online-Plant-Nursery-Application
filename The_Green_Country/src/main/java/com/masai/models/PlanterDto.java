@@ -34,7 +34,7 @@ public class PlanterDto {
 	
 	@NotNull(message = "Planter Cost should not be null")
 	@Min(value = 1, message = "Planter cost is must be greater than equal to 1")
-	private Integer PlanterCost;
+	private Double PlanterCost;
 	
 	
 	

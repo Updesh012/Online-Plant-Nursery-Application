@@ -39,11 +39,15 @@ public class PlantController {
 	@Autowired
 	private PlantService pService;
 
+
+
+
 	@Autowired
 	private AdminService aService;
 
 	@Autowired
 	private AdminSessionDao asDao;
+
 
 
 //	adding new plant in database
