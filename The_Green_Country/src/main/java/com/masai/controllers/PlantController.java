@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.exceptions.AdminException;
 import com.masai.exceptions.PlantNotFoundException;
+import com.masai.models.CurrentAdminSession;
+import com.masai.models.Customer;
 import com.masai.models.Plant;
+import com.masai.repositories.AdminSessionDao;
+import com.masai.services.AdminService;
 import com.masai.services.PlantService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -23,25 +28,45 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 public class PlantController {
 
+	//	just checking
+	@GetMapping("/welcome")
+	public String welcome() {
+	
+		return "welcome to The Green Country";
+	
+	}
+
 	@Autowired
 	private PlantService pService;
 
-//	just checking
-	@GetMapping("/welcome")
-	public String welcome() {
+	@Autowired
+	private AdminService aService;
 
-		return "welcome to The Green Country";
+	@Autowired
+	private AdminSessionDao asDao;
 
-	}
 
 //	adding new plant in database
 
-	@PostMapping("/plants")
-	public ResponseEntity<Plant> addPlantHandler(@RequestBody Plant plant) {
+	@PostMapping("admin/plants{adminkey}")
+	public ResponseEntity<Plant> addPlantHandler(@PathVariable("adminkey") String key,  @RequestBody Plant plant) throws AdminException {
 
-		Plant pObj = pService.addPlant(plant);
+		
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		return new ResponseEntity<Plant>(pObj, HttpStatus.CREATED);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+			Plant pObj = pService.addPlant(plant);
+
+			return new ResponseEntity<Plant>(pObj, HttpStatus.CREATED);
+			
+			
+		}
+		
+		
+		
+		
 
 	}
 
@@ -57,26 +82,43 @@ public class PlantController {
 
 	// updating existing plant details
 
-	@PutMapping("/plants/")
-	public ResponseEntity<Plant> updatePlantHandler(@Valid @RequestBody Plant plant)
-			throws PlantNotFoundException {
+	@PutMapping("admin/plants/{adminkey}")
+	public ResponseEntity<Plant> updatePlantHandler(@Valid @RequestBody Plant plant,@PathVariable("adminkey") String key)
+			throws PlantNotFoundException, AdminException {
 
-		Plant pObj = pService.updatePlant(plant);
+	
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		return new ResponseEntity<Plant>(pObj, HttpStatus.ACCEPTED);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+			Plant pObj = pService.updatePlant(plant);
+
+			return new ResponseEntity<Plant>(pObj, HttpStatus.ACCEPTED);
+			
+			
+		}
 
 	}
 
 	// delete existing plant by PlantId
 
-	@DeleteMapping("/plants/{id}")
-	public ResponseEntity<Plant> deletePlantByIdHandler(@PathVariable("id") Integer plantId)
-			throws PlantNotFoundException {
+	@DeleteMapping("admin/plants/{id}/{adminkey}")
+	public ResponseEntity<Plant> deletePlantByIdHandler(@PathVariable("id") Integer plantId,@PathVariable("adminkey")String key)
+			throws PlantNotFoundException, AdminException {
 
-		Plant plant = pService.deletePlantById(plantId);
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+			Plant plant = pService.deletePlantById(plantId);
 
+			return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+
+			
+		}
+		
 	}
 
 	// view plant by PlantId
@@ -115,24 +157,43 @@ public class PlantController {
 
 	// set new Quantity of plant
 
-	@PutMapping("/setPlantQuantity/{id}/{quantity}")
+	@PutMapping("admin/setPlantQuantity/{id}/{quantity}/{adminkey}")
 	public ResponseEntity<Plant> setPlantQuantityByplantIdHandler(@PathVariable("id") Integer plantid,
-			@PathVariable("quantity") Integer quantity) throws PlantNotFoundException {
+			@PathVariable("quantity") Integer quantity,@PathVariable("adminkey") String key) throws PlantNotFoundException, AdminException {
 
-		Plant plant = pService.changeQuantityOfPlantByPlantId(plantid, quantity);
+		
 
-		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
+
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+			Plant plant = pService.changeQuantityOfPlantByPlantId(plantid, quantity);
+
+			return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+		
+			
+		}
 	}
 
 	// set new Price of plant
 
-	@PutMapping("/setPlantPrice/{id}/{price}")
-	public ResponseEntity<Plant> setPlantPriceByplantIdHandler(@PathVariable("id") Integer plantid,
-			@PathVariable("price") Double price) throws PlantNotFoundException {
+	@PutMapping("admin/setPlantPrice/{id}/{price}/{adminkey}")
+	public ResponseEntity<Plant> setPlantPriceByplantIdHandler(@PathVariable("adminkey") String key,@PathVariable("id") Integer plantid,
+			@PathVariable("price") Double price) throws PlantNotFoundException, AdminException {
+		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 
-		Plant plant = pService.changePriceOfPlantByPlantId(plantid, price);
-
-		return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+		if (loggedInAdmin == null) {
+			throw new AdminException("Please provide a valid key");
+		} else {
+	
+			
+			Plant plant = pService.changePriceOfPlantByPlantId(plantid, price);
+			
+			return new ResponseEntity<Plant>(plant, HttpStatus.OK);
+		}
 	}
+	
+
 
 }
