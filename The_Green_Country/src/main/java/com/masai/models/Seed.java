@@ -29,20 +29,20 @@ public class Seed {
 	private Integer seedId;
 	
 	@NotBlank(message = "Seed Name is Mandatory...")
-	@Pattern(regexp = "^[A-Za-z]+$")
+	@Pattern(regexp = "^[A-Za-z0-9]+$")
 	private String name;
 	
-	@Pattern(regexp = "^[A-Za-z]+$")
+	@Pattern(regexp = "^[A-Za-z0-9]+$")
 	private String bloomTime;
 	
-	@Pattern(regexp = "^[A-Za-z]+$")
+	@Pattern(regexp = "^[A-Za-z0-9]+$")
 	private String watering;
 	
 	@NotBlank(message = "Temperature Field is mandatory")
 	private String temperature;
 	
 	@NotBlank(message = "Type of Seed field is mandatory")
-	@Pattern(regexp = "^[A-Za-z]+$")
+	@Pattern(regexp = "^[A-Za-z0-9]+$")
 	private String typeOfSeed;
 	
 	

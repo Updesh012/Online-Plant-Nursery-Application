@@ -1,9 +1,13 @@
 package com.masai.models;
 
+
+
 import lombok.Data;
 
 @Data
 public class CustomerLoginDTO {
+
+	
 
 	private String mobileNo;
 	private String password;

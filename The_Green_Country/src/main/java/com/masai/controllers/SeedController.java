@@ -41,7 +41,7 @@ public class SeedController {
 //	adding new seed in database
 
 	@PostMapping("admin/seeds/{adminkey}")
-	public ResponseEntity<Seed> addSeedHandler(@PathVariable("adminkey") String key, @RequestBody Seed seed)
+	public ResponseEntity<Seed> addSeedHandler(@PathVariable("adminkey") String key,@Valid @RequestBody Seed seed)
 			throws SeedNotFoundException, AdminException {
 
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);

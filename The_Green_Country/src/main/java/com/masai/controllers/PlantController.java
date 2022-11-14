@@ -53,7 +53,7 @@ public class PlantController {
 //	adding new plant in database
 
 	@PostMapping("admin/plants{adminkey}")
-	public ResponseEntity<Plant> addPlantHandler(@PathVariable("adminkey") String key,  @RequestBody Plant plant) throws AdminException {
+	public ResponseEntity<Plant> addPlantHandler(@PathVariable("adminkey") String key,@Valid @RequestBody Plant plant) throws AdminException {
 
 		
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);

@@ -1,5 +1,7 @@
 package com.masai.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class CustomerController {
 	
 	
 	@PostMapping("/customers")
-	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) throws CustomerException {
+	public ResponseEntity<Customer> saveCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
 		
 		Customer savedCustomer= cService.createCustomer(customer);
 		
@@ -30,7 +32,7 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/customers")
-	public  ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer,@RequestParam(required = false) String key ) throws CustomerException {
+	public  ResponseEntity<Customer> updateCustomer( @Valid @RequestBody Customer customer,@RequestParam(required = false) String key ) throws CustomerException {
 		
 		
 		Customer updatedCustomer= cService.updateCustomer(customer, key);
