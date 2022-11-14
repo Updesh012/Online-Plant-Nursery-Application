@@ -34,11 +34,11 @@
 # Features
 <h3> Admin functionalities </h3>
 * Admin can save their details.<br>
-* Admin can login on application<br>
+* Admin can login on application.<br>
 * Admin can save new Customers details.<br>
 * Admin can delete Customers details.<br>
 * Admin can save new Plants, seed, and planters details as well.<br>
-* Admin can get all the details of plats, planters, seed and customers.<br>
+* Admin can get all the details of plants, planters, seed and customers.<br>
 * Admin can logout from application.<br>
 
 <h3>Costomer functionalities </h3>
