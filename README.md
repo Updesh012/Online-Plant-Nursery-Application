@@ -5,9 +5,10 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 
 <div id="header" align="center">
 
-![logo_TheGreenCountry](https://user-images.githubusercontent.com/101568121/201632921-91fd8f6d-05cc-4733-b0b9-e729e18362ab.jpg)
+  <img src="![logo_TheGreenCountry](https://user-images.githubusercontent.com/101568121/201632921-91fd8f6d-05cc-4733-b0b9-e729e18362ab.jpg)" width="80%" height = "200px"/>
 
-  width="80%" height = "200px"/>
+
+  
 </div>
 
 
