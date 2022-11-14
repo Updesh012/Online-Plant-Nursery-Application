@@ -1,6 +1,7 @@
 # Online Plant Nursery Application
-This website is basically a online store of Plant where customer can see and buy plants.
-Tech-Stack : Java, Mysql, Spring Boot, Swagger.
+<div id="header" align="center">
+  <img src="https://github.com/Updesh012/belligerent-glass-5037/blob/main/The_Green_Country/src/main/java/com/masai/images/project_logo.jpeg" width="40%" height = "200px"/>
+</div>
 
 
 >   The main objective this Online plant nursery management project is to build a system that will help a company to manage its Users along with admin, customers, plants, planters and available seeds details. A large company will find it extremely hard to keep track of all its order details. This system will automate a lot of these processes and the presence of digitized records will make access easier.
@@ -9,7 +10,15 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 
 > This is a Group project executed in 5 days with 5 members of team.
 
+<h1 align = "center"> ER Diagram </h1>
+<div id="header" align="center">
+  <img src="https://github.com/Updesh012/belligerent-glass-5037/blob/main/The_Green_Country/src/main/java/com/masai/images/ERD%20of%20The_Green_Country.png" width="90%" height = "350px"/>
+</div>
 
+<h1 align = "center"> Modules </h1>
+<div id="header" align="center">
+  <img src="https://github.com/Updesh012/belligerent-glass-5037/blob/main/The_Green_Country/src/main/java/com/masai/images/Modules.png" width="90%" height = "350px"/>
+</div>
 
 # Tech-Stack Used
 1.) Spring-Boot <br>
