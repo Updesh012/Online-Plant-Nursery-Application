@@ -42,7 +42,7 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 * Customer can logout from application.<br>
 
 
-<h3>Team Member</h3>
+# Team Member
 * Updesh <br>
 * SaiPrasad <br>
 * Pritu <br>
@@ -85,4 +85,8 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 
 ![image](https://user-images.githubusercontent.com/101568121/201648723-2a6adfac-1c2d-4db3-bfc5-e4ed3f12206a.png)
 
+> We have used the MySql Database for storing all the data in tables so that we can perform all the features on that very smoothly.
 
+<h3>All tables in database :</h3>
+
+![image](https://user-images.githubusercontent.com/101568121/201653700-b3243bc0-52ec-4a20-864d-8bc3f9c15320.png)
