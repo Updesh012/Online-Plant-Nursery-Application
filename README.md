@@ -14,9 +14,12 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 # Tech-Stack Used
 1.) Spring-Boot <br>
 2.) MySQL <br>
-3.) JPA <br>
-4.) Hibernate <br>
-5.) JDBC <br>
+3.) Spring Data JPA <br>
+4.) Maven <br>
+5.) Hibernate <br>
+6.) JDBC <br>
+7.) swagger-ui <br>
+8.) java<br>
 
 
 # Features
