@@ -56,7 +56,7 @@ public class PlanterController {
 	}
 
 	@PostMapping("admin/plantersWithSeed/{adminkey}")
-	public ResponseEntity<Planter> addPlanterWithSeeds(@PathVariable("adminkey") String key,@RequestBody Planter pObj) throws AdminException {
+	public ResponseEntity<Planter> addPlanterWithSeeds(@PathVariable("adminkey") String key,@Valid @RequestBody Planter pObj) throws AdminException {
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 		if (loggedInAdmin == null) {
 			throw new AdminException("Please provide a valid key");

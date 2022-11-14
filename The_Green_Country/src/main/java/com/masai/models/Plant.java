@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,6 +26,7 @@ public class Plant {
 	private Integer plantId;
 	
 	@NotNull(message = "plant height can not be null")
+	@Min(value = 1, message = "Planter height is must be greater than equal to 1")
 	private Integer plantHeight;
 	
 	
@@ -49,9 +51,11 @@ public class Plant {
 	private String description;
 
 	@NotNull(message = "Plant Stock can not be null")
+	@Min(value = 1, message = "Planter height is must be greater than equal to 1")
 	private Integer plantsStock;
 	
 	@NotNull(message = "plant cost can not be null")
+	@Min(value = 1, message = "Planter height is must be greater than equal to 1")
 	private Double plantCost;
 	
 	
