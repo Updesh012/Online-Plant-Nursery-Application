@@ -2,6 +2,8 @@ package com.masai.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class PlanterController {
 
 
 	@PostMapping("admin/planters/{adminkey}")
-	public ResponseEntity<Planter> addPlanterOnly(@PathVariable("adminkey") String key,@RequestBody PlanterDto pDto) throws AdminException {
+	public ResponseEntity<Planter> addPlanterOnly(@PathVariable("adminkey") String key,@Valid @RequestBody PlanterDto pDto) throws AdminException {
 
 
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
@@ -54,7 +56,7 @@ public class PlanterController {
 	}
 
 	@PostMapping("admin/plantersWithSeed/{adminkey}")
-	public ResponseEntity<Planter> addPlanterWithSeeds(@PathVariable("adminkey") String key,@RequestBody Planter pObj) throws AdminException {
+	public ResponseEntity<Planter> addPlanterWithSeeds(@PathVariable("adminkey") String key,@Valid @RequestBody Planter pObj) throws AdminException {
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
 		if (loggedInAdmin == null) {
 			throw new AdminException("Please provide a valid key");

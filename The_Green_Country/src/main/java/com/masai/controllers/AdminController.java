@@ -2,6 +2,8 @@ package com.masai.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class AdminController {
 	private AdminSessionDao asDao;
 
 	@PostMapping("/createadmin")
-	public ResponseEntity<Admin> saveAdmin(@RequestBody Admin admin) throws AdminException {
+	public ResponseEntity<Admin> saveAdmin(@Valid @RequestBody Admin admin) throws AdminException {
 
 		Admin savedAdmin = aService.createAdmin(admin);
 
@@ -48,7 +50,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/customers/{adminkey}")
-	public ResponseEntity<Customer> saveCustomer(@PathVariable("adminkey") String key, @RequestBody Customer customer)
+	public ResponseEntity<Customer> saveCustomer(@PathVariable("adminkey") String key, @Valid @RequestBody Customer customer)
 			throws CustomerException, AdminException {
 
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
@@ -65,7 +67,7 @@ public class AdminController {
 	}
 
 	@PutMapping("/customers")
-	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer,
+	public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer,
 			@RequestParam(required = false) String key) throws CustomerException, AdminException {
 
 		CurrentAdminSession loggedInAdmin = asDao.findByUuid(key);
