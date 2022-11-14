@@ -42,7 +42,7 @@ Tech-Stack : Java, Mysql, Spring Boot, Swagger.
 * Customer can logout from application.<br>
 * 
 <h1 align = "center"> Some functionalities images </h1>
-<h2 align = "center"> Admin Login </h2>
+<h2 align = "center"> ** Admin Controller & Login **</h2>
 
 ![image](https://user-images.githubusercontent.com/101568121/201647542-65d85957-e742-4b65-8c12-5958f19a36b6.png)
 
