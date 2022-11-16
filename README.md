@@ -98,6 +98,3 @@
 
 > We have used the MySql Database for storing all the data in tables so that we can perform all the features on that very smoothly.
 
-<h3>All tables in database :</h3>
-
-![image](https://user-images.githubusercontent.com/101568121/201653700-b3243bc0-52ec-4a20-864d-8bc3f9c15320.png)
