@@ -4,7 +4,7 @@
 </div>
 
 
->   The main objective this Online plant nursery management project is to build a system that will help a company to manage its Users along with admin, customers, plants, planters and available seeds details. A large company will find it extremely hard to keep track of all its order details. This system will automate a lot of these processes and the presence of digitized records will make access easier.
+>   The main objective this Online plant nursery management project is to build a system that will help customers to view available plants, seeds, planters with details and also they can place orders. Admin can perform CRUD operations on plants, seeds, and planters.
 
 > Online Plant Nursery Management System is a Spring-Boot project Backend based application.
 
