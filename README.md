@@ -10,7 +10,7 @@
 
 > This is a Group project executed in 5 days with 5 members of team.
 
-# For detailed explanation [Video](https://drive.google.com/file/d/1QWRb2qXDUKa7sAe60lffJNT_XVPCh-iT/view?usp=sharing)
+# For detailed explanation [Video](https://drive.google.com/file/d/1IpLkUn1LuYpX4cmZ8VADj_5RJy-qj8Iq/view?usp=sharing)
 
 <h1 align = "center"> ER Diagram </h1>
 <div id="header" align="center">
