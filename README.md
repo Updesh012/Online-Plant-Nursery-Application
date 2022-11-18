@@ -1,14 +1,16 @@
-# Online Plant Nursery Application
+# REST API for Online Plant Nursery Application
+# Logo
+
 <div id="header" align="center">
   <img src="https://github.com/Updesh012/belligerent-glass-5037/blob/main/The_Green_Country/src/main/java/com/masai/images/project_logo.jpeg" width="40%" height = "200px"/>
 </div>
 
 
->   The main objective this Online plant nursery management project is to build a system that will help customers to view available plants, seeds, planters with details and also they can place orders. Admin can perform CRUD operations on plants, seeds, and planters.
+ * The main objective this Online plant nursery management project is to build a system that will help customers to view available plants, seeds, planters with details and also they can place orders. Admin can perform CRUD operations on plants, seeds, and planters.
 
-> Online Plant Nursery Management System is a Spring-Boot project Backend based application.
+ * Online Plant Nursery Management System is a Spring-Boot project Backend based application.
 
-> This is a Group project executed in 5 days with 5 members of team.
+ * This is a Group project executed in 5 days with 5 members of team.
 
 # For detailed explanation [Video](https://drive.google.com/file/d/1IpLkUn1LuYpX4cmZ8VADj_5RJy-qj8Iq/view?usp=sharing)
 
@@ -23,14 +25,14 @@
 </div>
 
 # Tech-Stack Used
-1.) Spring-Boot <br>
-2.) MySQL <br>
-3.) Spring Data JPA <br>
-4.) Maven <br>
-5.) Hibernate <br>
-6.) JDBC <br>
-7.) swagger-ui <br>
-8.) java<br>
+  * Spring-Boot
+  * MySQL 
+  * Spring Data JPA 
+  * Maven 
+  * Hibernate 
+  * JDBC 
+  * swagger-ui 
+  * java
 
 
 # Features
@@ -55,7 +57,7 @@
 
 # Team Member
 * Updesh <br>
-* SaiPrasad <br>
+* Saiprasad <br>
 * Pritu <br>
 * ChandraBhan<br>
 * Rakesh <br>
