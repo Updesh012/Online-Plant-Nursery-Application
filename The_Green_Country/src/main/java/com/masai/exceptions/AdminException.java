@@ -2,6 +2,7 @@ package com.masai.exceptions;
 
 public class AdminException extends Exception{
 
+	// admin exception
 	public AdminException() {
 		// TODO Auto-generated constructor stub
 	}
